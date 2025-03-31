@@ -1,7 +1,0 @@
-/*
-Centered image, 30% screen width and with some margin.
-must be responsive
-*/
-img {
-    max-width: 25%;
-}

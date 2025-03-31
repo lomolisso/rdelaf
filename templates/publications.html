@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="terminal-section rough-edge">
+    <div class="terminal-header">
+        <span class="terminal-title">~/publications</span>
+    </div>
+    <div class="terminal-body">
+        <p class="terminal-line">
+            <span class="terminal-prompt">$</span> 
+            <span class="terminal-command">ls -la | sort -r</span>
+        </p>
+        <div class="terminal-output">
+            {% if page.extra and page.extra.journal_articles %}
+            <h3>Journal Articles</h3>
+            <ul class="publication-list">
+                {% for article in page.extra.journal_articles %}
+                <li>
+                    <strong class="pub-year">{{ article.date }}</strong>
+                    <span class="pub-title">{{ article.name }}</span>
+                    <a href="{{ get_url(path=article.url) }}" class="inline-link"><i class="fas fa-file-pdf"></i><span>PDF</span></a>
+                    <br>{{ article.authors | join(sep=", ") }}
+                    <br><em>{{ article.venue }}</em>{% if article.status %} ({{ article.status }}){% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            
+            {% if page.extra and page.extra.conference_posters %}
+            <h3>Conference Posters</h3>
+            <ul class="publication-list">
+                {% for poster in page.extra.conference_posters %}
+                <li>
+                    <strong class="pub-year">{{ poster.date }}</strong>
+                    <span class="pub-title">{{ poster.name }}</span>
+                    <a href="{{ get_url(path=poster.url) }}" class="inline-link"><i class="fas fa-file-pdf"></i><span>PDF</span></a>
+                    <br>{{ poster.authors | join(sep=", ") }}
+                    <br><em>{{ poster.venue }}</em>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        
+        {% if page.extra and page.extra.talks %}
+        <p class="terminal-line">
+            <span class="terminal-prompt">$</span> 
+            <span class="terminal-command">cat talks.txt</span>
+        </p>
+        <div class="terminal-output">
+            <h3>Talks and Presentations</h3>
+            <ul class="publication-list">
+                {% for talk in page.extra.talks %}
+                <li>
+                    <strong class="pub-year">{{ talk.date }}</strong>
+                    <span class="pub-title">{{ talk.name }}</span>
+                    {% if talk.url | split(pat="slides") | length > 1 %}
+                    <a href="{{ get_url(path=talk.url) }}" class="inline-link"><i class="fas fa-file-pdf"></i><span>Slides</span></a>
+                    {% else %}
+                    <a href="{{ get_url(path=talk.url) }}" class="inline-link"><i class="fas fa-file-pdf"></i><span>Poster</span></a>
+                    {% endif %}
+                    <br>{{ talk.venue }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 
