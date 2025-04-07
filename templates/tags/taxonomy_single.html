@@ -4,9 +4,6 @@
 {% block title %}#{{ term.name }} | {{ config.title }}{% endblock %}
 
 {% block content %}
-<div class="taxonomy-single">
-    <h1 class="tag-title">#{{ term.name }}</h1>
-    
     <div class="blog-posts">
         {% for page in term.pages %}
             {{ post_macros::post_summary(page=page) }}
@@ -16,5 +13,4 @@
     <div class="back-link">
         <a href="{{ get_url(path="tags") }}">← View all tags</a>
     </div>
-</div>
 {% endblock %} 

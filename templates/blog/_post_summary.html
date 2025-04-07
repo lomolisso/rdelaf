@@ -6,10 +6,14 @@
         {% if page.taxonomies.tags %}
             <span class="post-tags">
                 {% for tag in page.taxonomies.tags %}
-                    <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" 
-                       class="tag">
-                        #{{ tag }}
-                    </a>
+                    {% if term and term.name == tag %}
+                        <span class="tag current-tag">#{{ tag }}</span>
+                    {% else %}
+                        <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" 
+                           class="tag">
+                            #{{ tag }}
+                        </a>
+                    {% endif %}
                 {% endfor %}
             </span>
         {% endif %}

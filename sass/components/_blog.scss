@@ -73,6 +73,14 @@
           text-decoration: none;
         }
       }
+      
+      .current-tag {
+        display: inline-block;
+        font-weight: bold;
+        color: var(--orange);
+        font-size: 1rem;
+        pointer-events: none;
+      }
     }
   }
   
@@ -248,8 +256,6 @@
     border-radius: 4px;
     margin: 1.5rem 0;
   }
-  
- 
   
   blockquote {
     margin: 1.5rem 0;

@@ -49,6 +49,15 @@
   }
 }
 
+// Current tag styling (non-clickable)
+.current-tag {
+  display: inline-block;
+  font-weight: bold;
+  color: var(--orange);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
 .tag-title {
   color: var(--orange);
   font-weight: bold;
