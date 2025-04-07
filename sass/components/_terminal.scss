@@ -1,0 +1,81 @@
+// Terminal styling
+.terminal-section {
+  margin-bottom: 30px;
+  background-color: var(--terminal-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background-color: var(--terminal-header);
+  padding: 8px 15px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.terminal-title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--orange);
+}
+
+.terminal-body {
+  padding: 15px;
+}
+
+.terminal-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.terminal-prompt {
+  color: var(--blue);
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.terminal-command {
+  color: var(--green);
+  font-weight: normal;
+}
+
+.terminal-output {
+  color: var(--foreground);
+  margin-left: 20px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  border-left: 2px solid var(--border-color); /* Default has border */
+}
+
+// Remove border and indentation for blog and taxonomy pages only
+.blog-page .terminal-output,
+.tag-page .terminal-output,
+.taxonomy-page .terminal-output {
+  border-left: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+// Terminal list styling
+.terminal-output ul {
+  list-style-type: none;
+  margin-left: 10px;
+}
+
+.terminal-output li {
+  margin-bottom: 5px;
+}
+
+.terminal-output li::before {
+  content: "";
+  display: none;
+}
+
+// Rough edges effect
+.rough-edge {
+  @include rough-edge;
+} 

@@ -1,0 +1,23 @@
+{% extends "tags/taxonomy_list.html" %}
+
+{% block title %}Tags | {{ config.title }}{% endblock %}
+
+{% block body_class %}taxonomy-page tag-page{% endblock %}
+
+{% block content %}
+<div class="terminal-section rough-edge">
+    <div class="terminal-header">
+        <span class="terminal-title">~/tags</span>
+    </div>
+    <div class="terminal-body">
+        <p class="terminal-line">
+            <span class="terminal-prompt">$</span> 
+            <span class="terminal-command">ls -la tags/ | grep -v "^\\." | sort</span>
+        </p>
+        
+        <div class="terminal-output">
+            {{ super() }}
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,42 @@
+// Publications styling
+.publication-list {
+  list-style-type: none;
+  padding-left: 0;
+  
+  li {
+    margin-bottom: 20px;
+    padding-left: 0;
+    position: relative;
+    
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.pub-year {
+  color: var(--green);
+  margin-right: 10px;
+}
+
+.pub-title {
+  color: var(--aqua);
+  font-weight: bold;
+}
+
+.pub-links {
+  margin-top: 5px;
+  font-size: 0.9em;
+  
+  a {
+    margin-right: 5px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    border-bottom: none;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: var(--selection);
+    }
+  }
+} 

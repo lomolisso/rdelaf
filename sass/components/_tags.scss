@@ -1,0 +1,74 @@
+// Tag taxonomy styles (inside terminal)
+
+.taxonomy-list, .taxonomy-single {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  
+  h1 {
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
+
+.tags-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  
+  li {
+    margin-bottom: 1rem;
+    
+    a.tag {
+      display: inline-block;
+      font-weight: bold;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+      
+      &:hover {
+        color: var(--orange);
+        text-decoration: none;
+      }
+      
+      &.active-tag {
+        color: var(--orange);
+        text-decoration: none;
+      }
+    }
+    
+    .count {
+      margin-left: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.tag-title {
+  color: var(--orange);
+  font-weight: bold;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  margin-top: 2rem;
+  
+  a {
+    display: inline-block;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+    
+    &:hover {
+      text-decoration: none;
+      color: var(--orange);
+    }
+  }
+} 

@@ -1,0 +1,120 @@
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin: 1.5em 0 0.5em;
+  line-height: 1.2;
+  color: var(--yellow);
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 0;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+strong {
+  color: var(--aqua);
+  font-weight: bold;
+}
+
+pre {
+  margin: 15px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  position: relative;
+  
+  // Remove overflow from pre element
+  overflow: hidden;
+  
+  // Remove padding to accommodate the top bar
+  padding: 0;
+  
+  // Add code top bar
+  &::before {
+    content: attr(data-language);
+    display: flex;
+    align-items: center;
+    height: 36px;
+    background-color: var(--code-header-bg);
+    color: var(--code-header-color);
+    padding: 0 16px;
+    font-size: 0.85em;
+    text-transform: lowercase;
+    border-bottom: 1px solid var(--border-color);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  // Content needs its own padding now and scrollability
+  code {
+    display: block;
+    padding: 15px;
+    background-color: var(--code-bg);
+    color: var(--code-color);
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  // Copy button
+  .code-copy-button {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    color: var(--code-header-color);
+    font-size: 0.85em;
+    padding: 0 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+    
+    &:hover {
+      color: var(--yellow);
+    }
+    
+    .copy-icon, .copied-icon {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .copied-icon {
+      display: none;
+    }
+    
+    &.copied {
+      .copy-icon {
+        display: none;
+      }
+      .copied-icon {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+em {
+  font-style: italic;
+  color: var(--purple);
+} 

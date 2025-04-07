@@ -1,0 +1,31 @@
+// CV date styling
+.terminal-output strong + br + span,
+.terminal-output li strong ~ em {
+  color: var(--red);
+}
+
+// Specific CV date styling - wrap dates in a span with this class
+.cv-date {
+  color: var(--red);
+}
+
+// CV list styling
+.cv-list {
+  li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 15px;
+  }
+  
+  .list-dot {
+    color: var(--aqua);
+    margin-right: 5px;
+    position: absolute;
+    left: 0;
+  }
+  
+  .list-content {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+} 

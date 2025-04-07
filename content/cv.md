@@ -1,6 +1,6 @@
 ---
 title: "CV"
-template: "cv.html"
+template: "cv/cv.html"
 extra:
   education:
     - degree: "Ph.D. in Computer Science"

@@ -19,7 +19,7 @@ extra:
       url: "https://inria.hal.science/hal-04048809/file/delafuente23handson.pdf"
 ---
 
-## About Me
+# About Me
 
 Hi! I am an incoming Computer Science PhD student at the University of Illinois Urbana-Champaign, where I will be working under the supervision of [Prof. Josep Torrellas](https://iacoma.cs.uiuc.edu/josep/torrellas.html) starting in Fall 2025. My research interests lie in computer architecture, hardware security, and domain-specific hardware accelerators.
 

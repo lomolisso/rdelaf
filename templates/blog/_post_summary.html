@@ -1,0 +1,26 @@
+{% macro post_summary(page) %}
+<div class="blog-post-item">
+    <h2 class="post-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+    <div class="post-meta">
+        <span class="post-date">{{ page.date | date(format="%B %d, %Y") }}</span>
+        {% if page.taxonomies.tags %}
+            <span class="post-tags">
+                {% for tag in page.taxonomies.tags %}
+                    <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" 
+                       class="tag">
+                        #{{ tag }}
+                    </a>
+                {% endfor %}
+            </span>
+        {% endif %}
+    </div>
+    <div class="post-summary">
+        {% if page.description %}
+            {{ page.description }}
+        {% else %}
+            {{ page.content | striptags | truncate(length=200) }}
+        {% endif %}
+    </div>
+    <a href="{{ page.permalink }}" class="read-more">Read more →</a>
+</div>
+{% endmacro %} 

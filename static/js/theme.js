@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toggle theme when button is clicked
   themeToggle.addEventListener('click', () => {
     const isLightMode = document.body.classList.toggle('light-mode');
+    const newTheme = isLightMode ? 'light' : 'dark';
     
     // Update button text and save preference
     if (isLightMode) {

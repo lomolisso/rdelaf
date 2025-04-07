@@ -1,6 +1,6 @@
 ---
 title: "Publications"
-template: "publications.html"
+template: "publications/publications.html"
 extra:
   journal_articles:
     - name: "Enhancing Predictive Maintenance in Mining Mobile Machinery through a TinyML-enabled Hierarchical Inference Network"

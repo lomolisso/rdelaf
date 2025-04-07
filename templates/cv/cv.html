@@ -2,6 +2,8 @@
 
 {% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
+{% block body_class %}cv-page{% endblock %}
+
 {% block content %}
 
 <div class="terminal-section rough-edge">
@@ -91,19 +93,4 @@
         {% endif %}
     </div>
 </div>
-
-<!-- Script to add styling to dates in the CV -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Find all parenthesized text in list items that contain dates
-    const listItems = document.querySelectorAll('.terminal-output li');
-    listItems.forEach(item => {
-        const text = item.innerHTML;
-        // Match text in parentheses
-        const dateRegex = /\(([^)]+)\)/g;
-        const updatedText = text.replace(dateRegex, '<span class="cv-date">($1)</span>');
-        item.innerHTML = updatedText;
-    });
-});
-</script>
 {% endblock %} 
