@@ -21,10 +21,10 @@ extra:
 
 # About Me
 
-Hi! I am an incoming Computer Science PhD student at the University of Illinois Urbana-Champaign, where I will be working under the supervision of [Prof. Josep Torrellas](https://iacoma.cs.uiuc.edu/josep/torrellas.html) starting in Fall 2025. My research interests lie in computer architecture, hardware security, and domain-specific hardware accelerators.
+Hi! I am a first-year Computer Science PhD student at the University of Illinois Urbana-Champaign, working in the [i-acoma group](https://iacoma.cs.uiuc.edu/index.html) under the supervision of [Prof. Josep Torrellas](https://iacoma.cs.uiuc.edu/josep/torrellas.html). My research interests lie in 3D stacking, hardware security, and fully homomorphic encryption acceleration.
 
-Previously, I was an M.Sc. in Computer Science student at the University of Chile, advised by [Prof. Alejandro Hevia](https://users.dcc.uchile.cl/~ahevia/) and [Prof. Luciano Radrigan](https://www.linkedin.com/in/lucianoradrigan/?originalSubdomain=cl). There I worked on cryptographic protocols for distributed systems and ML-enabled IoT nodes.
+I earned my M.Sc. in Computer Science at the University of Chile, where I was advised by [Prof. Alejandro Hevia](https://users.dcc.uchile.cl/~ahevia/) and [Prof. Luciano Radrigan](https://www.linkedin.com/in/lucianoradrigan/?originalSubdomain=cl). My work there involved cryptographic protocols for distributed systems and ML-enabled IoT nodes.
 
-Outside of my studies, I enjoy hands-on projects, particularly tinkering with electronics, as well as hobbyist game development. I also enjoy cooking, hitting the gym, and reading manga.
+Beyond research, I enjoy hands-on projects, particularly tinkering with electronics, as well as hobbyist game development. I also like to cook, lift weights, and read manga.
 
-Feel free to contact me through any of the provided links, and check out my [blog](#) where I write about what I'm up to!
+Feel free to contact me through any of the provided links or check out my [blog](#) to see what I'm currently working on!
