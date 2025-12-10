@@ -5,17 +5,12 @@ extra:
   education:
     - degree: "Ph.D. in Computer Science"
       institution: "University of Illinois Urbana-Champaign"
-      date: "Starting Fall 2025"
+      date: "Fall 2025 - Present"
       advisor: "Professor Josep Torrellas"
     
     - degree: "M.Sc. in Computer Science"
       institution: "University of Chile"
-      date: "Fall 2023 - Present" 
-      advisor: "Prof. Alejandro Hevia and Prof. Luciano Radrigan"
-    
-    - degree: "P.Eng. in Computer Science and Engineering"
-      institution: "University of Chile"
-      date: "Fall 2022 - Present"
+      date: "Fall 2023 - Spring 2024" 
       advisor: "Prof. Alejandro Hevia and Prof. Luciano Radrigan"
     
     - degree: "B.Eng. in Computer Science and Engineering"
@@ -23,14 +18,19 @@ extra:
       date: "Fall 2018 - Fall 2022"
   
   research:
+    - position: "Graduate Research Assistant"
+      institution: "I-acoma Group, UIUC"
+      date: "August 2025 - Present"
+      advisor: "Prof. Josep Torrellas"
+    
     - position: "Research Assistant"
       institution: "CLCERT Group, University of Chile"
-      date: "January 2022 - Present"
+      date: "January 2022 - December 2024"
       advisor: "Prof. Alejandro Hevia"
     
     - position: "Research Assistant"
       institution: "Dept. of Electrical Engineering, University of Concepción"
-      date: "January 2022 - Present"
+      date: "July 2022 - December 2024"
       advisor: "Prof. Luciano Radrigan"
     
     - position: "Research Intern"
@@ -56,12 +56,12 @@ extra:
       courses: ["Systems Programming"]
   
   skills:
-    - category: "Software"
-      items: ["Docker", "Git", "TensorFlow", "FastAPI", "Django", "React", "Flutter"]
-    
     - category: "Hardware"
-      items: ["ESP32", "nRF52", "Arduino", "Raspberry Pi", "FPGA (learning)"]
+      items: ["SystemVerilog", "Vivado", "Gem5", "Ramulator", "McPAT", "ESP32", "nRF52", "Raspberry Pi"]
     
     - category: "Programming"
-      items: ["C/C++", "Python", "Rust", "Assembly RISC-V", "Java/Scala"]
+      items: ["C/C++", "Python", "Rust", "RISC-V", "GoLang", "Java", "Scala"]
+    
+    - category: "Software"
+      items: ["Docker", "Bash", "Git", "TensorFlow", "Pytorch", "LLVM IR", "MPI", "OpenMP", "Valgrind"]
 ---
