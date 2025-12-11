@@ -16,7 +16,7 @@
 
 = Summary
 // Co-optimization of CPU, GPU and accelerator microarchitecture and 3D VLSI processes.
-I am a first-year Computer Science Ph.D. student at the University of Illinois Urbana-Champaign. My research interests lie at the intersection of microarchitecture and 3D VLSI integration. I am currently exploring System-Technology Co-Optimization (STCO) methodologies to design next-generation heterogeneous systems—including CPUs, GPUs, and accelerators—that leverage vertical scaling to minimize latency, maximize interconnect density, and optimize energy efficiency.
+I am a first-year Computer Science Ph.D. student at the University of Illinois Urbana-Champaign. My research interests lie at the intersection of microarchitecture and 3D VLSI integration. I am currently exploring System-Technology Co-Optimization (STCO) methodologies to design next-generation heterogeneous systems—including CPUs, GPUs, and accelerators—that leverage logic-on-logic stacking enabled by CMOS 2.0 technology. 
 
 
 = Education
@@ -37,6 +37,7 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
   degrees: (
     ("M.S.", "Computer Science"),
   ),
+  gpa: "7.0/7.0",
     mentor: ("Advisors", "Prof. Alejandro Hevia and Prof. Luciano Radrigan"),
 )
 
@@ -47,6 +48,7 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
   degrees: (
     ("B.Eng.", "Computer Science and Engineering"),
   ),
+  gpa: "6.4/7.0",
 )
 
 = Relevant Coursework
@@ -82,7 +84,7 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
   date: "August 2025 - Present",
   location: "Urbana, IL",
   details: [
-    - Conducting literature review on state-of-the-art 3D VLSI integration and STCO, focusing on CMOS 2.0-enabled microarchitectural partitioning strategies for logic-on-logic stacking.
+    - Conducting literature review on state-of-the-art 3D VLSI integration and STCO, focusing on microarchitectural co-design methodologies for CMOS 2.0 implementations.
   ]
 )
 

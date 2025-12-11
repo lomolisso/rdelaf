@@ -21,7 +21,7 @@ extra:
 
 # About Me
 
-Hi! I am a first-year Computer Science PhD student at the University of Illinois Urbana-Champaign, working in the [i-acoma group](https://iacoma.cs.uiuc.edu/index.html) under the supervision of [Prof. Josep Torrellas](https://iacoma.cs.uiuc.edu/josep/torrellas.html). My research interests lie at the intersection of microarchitecture and 3D VLSI integration. I am currently exploring System-Technology Co-Optimization (STCO) methodologies to design next-generation heterogeneous systems—including CPUs, GPUs, and accelerators—that leverage vertical scaling to minimize latency, maximize interconnect density, and optimize energy efficiency.
+Hi! I am a first-year Computer Science PhD student at the University of Illinois Urbana-Champaign, working in the [i-acoma group](https://iacoma.cs.uiuc.edu/index.html) under the supervision of [Prof. Josep Torrellas](https://iacoma.cs.uiuc.edu/josep/torrellas.html). My research interests lie at the intersection of microarchitecture and 3D VLSI integration. I am currently exploring System-Technology Co-Optimization (STCO) methodologies to design next-generation heterogeneous systems—including CPUs, GPUs, and accelerators—that leverage logic-on-logic stacking enabled by CMOS 2.0 technology.
 
 I earned my M.Sc. in Computer Science at the University of Chile, where I was advised by [Prof. Alejandro Hevia](https://users.dcc.uchile.cl/~ahevia/) and [Prof. Luciano Radrigan](https://www.linkedin.com/in/lucianoradrigan/?originalSubdomain=cl). My work there involved cryptographic protocols for distributed systems and ML-enabled IoT nodes.
 
