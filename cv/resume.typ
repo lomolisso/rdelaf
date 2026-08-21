@@ -1,23 +1,28 @@
+// Short version: one page, for industry computer architecture internship applications.
+// Uses the same template.typ as the full CV.
+
 #import "template.typ": *
 
 #show: resume.with(
   author: "Raúl de la Fuente",
   location: "Urbana, IL",
-  lastupdated: "2025-12-10",
+  lastupdated: "2026-08-20",
   contacts: (
     [#link("mailto:rid2@illinois.edu")[Email]],
     [#link("https://rdelaf.nand.cl")[Website]],
     [#link("https://github.com/lomolisso")[GitHub]],
     [#link("https://www.linkedin.com/in/rdelaf-armijo/")[LinkedIn]],
   ),
-  // footer: [#align(center)[#emph[References available on request]]]
 )
 
+// One-page fit: slightly smaller type and tighter spacing than the academic CV.
+// Delete these three lines to revert to the template defaults (11pt).
+#set text(size: 10pt)
+#set par(leading: 0.5em)
+#set list(spacing: 0.55em)
 
 = Summary
-// Co-optimization of CPU, GPU and accelerator microarchitecture and 3D VLSI processes.
-I am a first-year Computer Science Ph.D. student at the University of Illinois Urbana-Champaign. My research interests lie at the intersection of microarchitecture and 3D VLSI integration. I am currently exploring System-Technology Co-Optimization (STCO) methodologies to design next-generation heterogeneous systems—including CPUs, GPUs, and accelerators—that leverage logic-on-logic stacking enabled by CMOS 2.0 technology. 
-
+Second-year Computer Science Ph.D. student at UIUC, advised by Prof. Josep Torrellas. I work on microarchitecture for 3D-stacked CPUs, GPUs, and accelerators. Seeking a Summer 2027 computer architecture internship.
 
 = Education
 #edu(
@@ -27,7 +32,8 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
   degrees: (
     ("Ph.D.", "Computer Science"),
   ),
-    mentor: ("Advisor", "Prof. Josep Torrellas"),
+  mentor: ("Advisor", "Prof. Josep Torrellas"),
+  gpa: "3.75/4.0"
 )
 
 #edu(
@@ -38,7 +44,6 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
     ("M.S.", "Computer Science"),
   ),
   gpa: "7.0/7.0",
-    mentor: ("Advisors", "Prof. Alejandro Hevia and Prof. Luciano Radrigan"),
 )
 
 #edu(
@@ -52,11 +57,96 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
 )
 
 = Relevant Coursework
-*Spring 2026:* CS 533 - Parallel Computer Architecture, ECE 425 - VLSI Design \
-*Fall 2025:* CS 433 - Computer System Organization, CS 426 - Compiler Construction, CS 484 - Parallel Programming
+*Fall 2026:* CS598APE - Advanced Performance Engineering, CS598HSA - Hardware & Software for AI \
+*Spring 2026:* CS533 - Parallel Computer Architecture, ECE425 - VLSI Design \
+*Fall 2025:* CS433 - Computer System Organization, CS426 - Compiler Construction, CS484 - Parallel Programming
+
+= Research Experience
+#exp(
+  institution: "I-acoma Group, UIUC",
+  mentor: ("Advisor", "Prof. Josep Torrellas"),
+  role: "Graduate Research Assistant",
+  date: "August 2025 - Present",
+  location: "Urbana, IL",
+  details: [
+    - Improving performance of distributed collectives on hopper-like GPGPU clusters through 3D NoCs. 
+    - Contributing to a universal LLM accelerator that maps kernel sub-functions onto logic and memory chiplets.
+  ]
+)
+
+#exp(
+  institution: "Dept. of Electrical Engineering, University of Concepción",
+  mentor: ("Advisor", "Prof. Luciano Radrigan"),
+  role: "Research Assistant",
+  date: "July 2022 - December 2024",
+  location: "Concepción, Chile",
+  details: [
+  - Wrote C/C++ firmware for TinyML IoT nodes with network-aware switching between edge and cloud inference.
+  ]
+)
+
+#exp(
+  institution: "CLCERT Group, University of Chile",
+  mentor: ("Advisor", "Prof. Alejandro Hevia"),
+  role: "Research Assistant",
+  date: "January 2022 - December 2024",
+  location: "Santiago, Chile",
+  details: [
+  - Migrated a homomorphic encryption system from finite-field to elliptic curve cryptography, cutting computation cost and enabling distributed key generation to run on resource-constrained embedded devices.
+  ]
+)
+
+#exp(
+  institution: "AIO Team, INRIA",
+  mentor: ("Advisor", "Prof. Thomas Watteyne"),
+  role: "Research Intern",
+  date: "January 2023 - April 2023",
+  location: "Paris, France",
+  details: [
+    - Evaluated the performance and energy consumption of a satellite IoT module; published as a poster at IPSN '23.
+  ]
+)
+
+
+= Technical Skills
+#skills((
+  ("Programming", (
+    [C/C++],
+    [CUDA],
+    [Python],
+    [Rust],
+    [RISC-V],
+    [GoLang],
+    [Java],
+    [Scala],
+    [Bash],
+  )),
+  ("Software", (
+    [Docker],
+    [Git],
+    [TensorFlow],
+    [Pytorch],
+    [LLVM IR],
+    [MPI],
+    [OpenMP],
+    [Valgrind],
+  )),
+    ("Hardware", (
+    [Vortex],
+    [SystemVerilog],
+    [Gem5],
+    [Ramulator],
+    [Virtuoso],
+    [Innovus],
+    [PrimePower],
+    [DesignCompiler],
+  )),
+))
+
+// NIC Chile internship (pentesting) omitted here: off-target for architecture roles.
+// Restore from resume_long.typ if applying to hardware security positions.
 
 = Publications
-
 #pub(
   title: "Enhancing Predictive Maintenance in Mining Mobile Machinery through a TinyML-enabled Hierarchical Inference Network",
   author: 0,
@@ -75,130 +165,3 @@ I am a first-year Computer Science Ph.D. student at the University of Illinois U
   url: "https://doi.org/10.1145/3583120.3589837",
 )
 
-= Research Experience
-
-#exp(
-  institution: "I-acoma Group, UIUC",
-  mentor: ("Advisor", "Prof. Josep Torrellas"),
-  role: "Graduate Research Assistant",
-  date: "August 2025 - Present",
-  location: "Urbana, IL",
-  details: [
-    - Conducting literature review on state-of-the-art 3D VLSI integration and STCO, focusing on microarchitectural co-design methodologies for CMOS 2.0 implementations.
-  ]
-)
-
-#exp(
-  institution: "AIO Team, INRIA",
-  mentor: ("Advisor", "Prof. Thomas Watteyne"),
-  role: "Research Intern",
-  date: "January 2023 - April 2023",
-  location: "Paris, France",
-  details: [
-    - Deployed a low-power mesh IoT network based on Dust Networks' SmartMesh IP technology for environmental monitoring in urban areas.
-    - Conducted a hands-on evaluation of a state-of-the-art satellite communication module for IoT applications, assessing its performance and energy efficiency.
-  ]
-)
-
-#exp(
-  institution: "Dept. of Electrical Engineering, University of Concepción",
-  mentor: ("Advisor", "Prof. Luciano Radrigan"),
-  role: "Research Assistant",
-  date: "July 2022 - December 2024",
-  location: "Concepción, Chile",
-  details: [
-    - Deployed a cyber-physical system for real-time monitoring of industrial processes using on-device machine learning for anomaly detection and failure prediction.
-    - Mainly responsible for: (i) Implementing the nodes' firmware in C/C++ , (ii) Designing and optimizing neural networks for embedded devices, and (iii) Conceptualizing an algorithm to dynamically switch between cloud and edge inference based on network conditions.
-    
-  ]
-)
-
-#exp(
-  institution: "CLCERT Group, University of Chile",
-  mentor: ("Advisor", "Prof. Alejandro Hevia"),
-  role: "Research Assistant",
-  project: "Applied Cryptography and Cybersecurity Lab at University of Chile",
-  date: "January 2022 - December 2024",
-  location: "Santiago, Chile",
-  details: [
-    - Contributed to the Psifos voting system, leveraging homomorphic encryption and zero-knowledge proofs to ensure secure and verifiable electronic elections.
-    - Migrated the system from traditional finite-field cryptography to elliptic curve cryptography, enhancing security and computational efficiency.
-    - Optimized the distributed key generation protocol used by election trustees to reduce computational overhead and enable participation from resource-constrained embedded devices.
-  ]
-)
-
-#exp(
-  institution: "NIC Chile Research Labs",
-  mentor: ("Mentor", "Eduardo Riveros"),
-  role: "Research Intern",
-  date: "January 2021 - March 2021",
-  location: "Santiago, Chile",
-  details: [
-    - Pentested the internal networks of NIC Chile and the Faculty of Physical and Mathematical Sciences at the University of Chile, identifying and reporting critical vulnerabilities.
-    - Developed a plugin for the Nmap network scanner to identify vulnerable IoT devices within nested networks, enabling automated scanning and reporting for security audits.
-  ]
-)
-
-= Activities
-#act(
-  period: "November'24",
-  act_content: "Presented talk 'Enhancing Predictive Maintenance in Mining Mobile Machinery through a TinyML-enabled Hierarchical Inference Network' at the CS Master's Seminar, University of Chile."
-)
-#act(
-  period: "2023 - 2024",
-  act_content: "Served as Teaching Assistant for both the Internet of Things Systems Design and Web Application Development courses at University of Chile."
-)
-#act(
-  period: "May'23",
-  act_content: "Presented the poster 'Hands-on Evaluation of Kinéis Satellite IoT Technology' at IPSN '23, San Antonio, TX."
-)
-#act(
-  period: "January'23",
-  act_content: "Assisted to the OpenSwarm project launch event at INRIA, Paris, France."
-)
-#act(
-  period: "2022",
-  act_content: "Participated in over 250 elections powered by the Psifos voting system, working with both internal departments of the University of Chile and external organizations."
-)
-#act(
-  period: "2021",
-  act_content: "Served as Teaching Assistant for the Systems Programming course at University of Chile."
-)
-
-= Awards
-- Recipient of the Master's in CS Scholarship from the University of Chile for the academic years 2023-2024.
-- Recipient of the Academic Excellence Award from the University of Chile for the years 2018-2022.
-
-= Technical Skills
-#skills((
-  ("Hardware", (
-    [SystemVerilog],
-    [Vivado],
-    [Gem5],
-    [Ramulator],
-    [McPAT],
-    [ESP32],
-    [nRF52],
-    [Raspberry Pi],
-  )),
-  ("Programming", (
-    [C/C++],
-    [Python],
-    [Rust],
-    [RISC-V],
-    [GoLang],
-    [Java],
-    [Scala],
-  )),
-    ("Software", (
-    [Docker],
-    [Bash],
-    [Git],
-    [TensorFlow],
-    [Pytorch],
-    [LLVM IR],
-    [MPI],
-    [OpenMP],
-    [Valgrind],
-  )),
-))
