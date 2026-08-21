@@ -86,11 +86,24 @@ function setupCatProfile() {
             story: "Nina and her two sisters were abandoned as kittens in March 2024. At about 6 months old I caught all three, found her sisters a home together, and Nina stayed with me."
         }
     };
-    const ownerName = name.textContent;
+    const inner = flip.querySelector('.flip-inner');
+    const frontImage = flip.querySelector('.flip-front img');
+    const owner = { name: name.textContent, image: frontImage.src, alt: frontImage.alt };
     const halfFlip = 300; // half of the 0.6s CSS flip transition
-    const fullFlip = 600;
     let currentCat = null;
     let transitioning = false;
+    let angle = 0;
+
+    // Rotate another half turn towards whatever face is currently hidden,
+    // after putting the incoming picture on it. This lets cat-to-cat
+    // switches flip directly without passing through the owner's photo.
+    function flipTo(image, alt) {
+        const hiddenFace = (angle / 180) % 2 === 1 ? frontImage : catImage;
+        hiddenFace.src = image;
+        hiddenFace.alt = alt;
+        angle += 180;
+        inner.style.transform = 'rotateY(' + angle + 'deg)';
+    }
 
     // Set the story text and restart its fade-in animation
     function setStory(text) {
@@ -104,44 +117,26 @@ function setupCatProfile() {
     function showCat(key) {
         const cat = cats[key];
         transitioning = true;
-        if (currentCat === null) {
-            catImage.src = cat.image;
-            catImage.alt = cat.name;
-            flip.classList.add('flipped');
-            currentCat = key;
-            setTimeout(function() {
-                name.textContent = cat.name;
-                contact.hidden = true;
-                locationRow.hidden = true;
-                story.hidden = false;
-                setStory(cat.story);
-                transitioning = false;
-            }, halfFlip);
-        } else {
-            // Flip away from the current cat, then flip back in with the new one
-            currentCat = key;
-            story.hidden = true;
-            flip.classList.remove('flipped');
-            setTimeout(function() {
-                catImage.src = cat.image;
-                catImage.alt = cat.name;
-                name.textContent = cat.name;
-                flip.classList.add('flipped');
-                setTimeout(function() {
-                    story.hidden = false;
-                    setStory(cat.story);
-                    transitioning = false;
-                }, halfFlip);
-            }, fullFlip);
-        }
+        currentCat = key;
+        flipTo(cat.image, cat.name);
+        flip.classList.add('flipped');
+        setTimeout(function() {
+            name.textContent = cat.name;
+            contact.hidden = true;
+            locationRow.hidden = true;
+            story.hidden = false;
+            setStory(cat.story);
+            transitioning = false;
+        }, halfFlip);
     }
 
     function showOwner() {
         transitioning = true;
         currentCat = null;
+        flipTo(owner.image, owner.alt);
         flip.classList.remove('flipped');
         setTimeout(function() {
-            name.textContent = ownerName;
+            name.textContent = owner.name;
             contact.hidden = false;
             locationRow.hidden = false;
             story.hidden = true;

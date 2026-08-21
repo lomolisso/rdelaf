@@ -192,10 +192,6 @@
     transform-style: preserve-3d;
   }
 
-  &.flipped .flip-inner {
-    transform: rotateY(180deg);
-  }
-
   .flip-front {
     backface-visibility: hidden;
   }
