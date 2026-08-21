@@ -1,6 +1,6 @@
 {% macro nav_links() %}
     <a href="{{ config.base_url }}" class="nav-link {% if current_path == "/" %}active{% endif %}">Home</a>
-    <a href="{{ get_url(path="documents/resume.pdf") }}" class="nav-link" target="_blank" rel="noopener">CV</a>
     <a href="{{ get_url(path="publications") }}" class="nav-link {% if current_path == "/publications/" %}active{% endif %}">Publications</a>
     <a href="{{ get_url(path="blog", trailing_slash=true) }}" class="nav-link {% if current_path is starting_with("/blog/") %}active{% endif %} {% if current_path is starting_with("/tags/") %}taxonomy-active{% endif %}">Blog</a>
+    <a href="{{ get_url(path="documents/resume.pdf") }}" class="nav-link">CV</a>
 {% endmacro %} 
