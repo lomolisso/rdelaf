@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Raúl de la Fuente - security</title>
+    <link rel="self" type="application/atom+xml" href="https://rdelaf.nand.cl/tags/security/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://rdelaf.nand.cl"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-08-16T00:00:00+00:00</updated>
+    <id>https://rdelaf.nand.cl/tags/security/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Elliptic Curve Cryptography: An Introduction</title>
+        <published>2023-08-16T00:00:00+00:00</published>
+        <updated>2023-08-16T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://rdelaf.nand.cl/blog/ecc/"/>
+        <id>https://rdelaf.nand.cl/blog/ecc/</id>
+        
+        <content type="html" xml:base="https://rdelaf.nand.cl/blog/ecc/">&lt;h1 id=&quot;elliptic-curve-cryptography-an-introduction&quot;&gt;Elliptic Curve Cryptography: An Introduction&lt;&#x2F;h1&gt;
+&lt;p&gt;Elliptic Curve Cryptography (ECC) is a powerful approach to public-key cryptography based on the algebraic structure of elliptic curves over finite fields. This post explains the mathematical foundations of ECC and its practical applications in modern cryptography.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;elliptic-curves-the-basics&quot;&gt;Elliptic Curves: The Basics&lt;&#x2F;h2&gt;
+&lt;p&gt;An elliptic curve over a field $K$ is defined by the Weierstrass equation:&lt;&#x2F;p&gt;
+&lt;p&gt;$$ E: y^2 = x^3 + ax + b $$&lt;&#x2F;p&gt;
+&lt;p&gt;where $a, b \in K$ and the discriminant $\Delta = -16(4a^3 + 27b^2) \neq 0$ (ensuring the curve is non-singular).&lt;&#x2F;p&gt;
+&lt;p&gt;In cryptography, we typically work with elliptic curves over finite fields $\mathbb{F}_p$ (where $p$ is a prime) or $\mathbb{F}_{2^m}$ (binary fields). For simplicity, we&#x27;ll focus on curves over $\mathbb{F}_p$, which gives us:&lt;&#x2F;p&gt;
+&lt;p&gt;$$ E(\mathbb{F}_p): y^2 \equiv x^3 + ax + b \pmod{p} $$&lt;&#x2F;p&gt;
+&lt;p&gt;The set of points on the curve, along with a special point at infinity $\mathcal{O}$, forms an abelian group.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;group-law-point-addition&quot;&gt;Group Law: Point Addition&lt;&#x2F;h2&gt;
+&lt;p&gt;The fundamental operation in ECC is point addition. Given two points $P$ and $Q$ on an elliptic curve, their sum $P + Q$ is defined geometrically:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw a line through $P$ and $Q$&lt;&#x2F;li&gt;
+&lt;li&gt;Find the third intersection point of this line with the curve&lt;&#x2F;li&gt;
+&lt;li&gt;Reflect this point across the x-axis to get $P + Q$&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Algebraically, if $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ with $P \neq Q$, then $P + Q = (x_3, y_3)$ where:&lt;&#x2F;p&gt;
+&lt;p&gt;$$ \lambda = \frac{y_2 - y_1}{x_2 - x_1} $$
+$$ x_3 = \lambda^2 - x_1 - x_2 $$
+$$ y_3 = \lambda(x_1 - x_3) - y_1 $$&lt;&#x2F;p&gt;
+&lt;p&gt;If $P = Q$, we use the tangent line (point doubling):&lt;&#x2F;p&gt;
+&lt;p&gt;$$ \lambda = \frac{3x_1^2 + a}{2y_1} $$
+$$ x_3 = \lambda^2 - 2x_1 $$
+$$ y_3 = \lambda(x_1 - x_3) - y_1 $$&lt;&#x2F;p&gt;
+&lt;p&gt;The point at infinity $\mathcal{O}$ serves as the identity element such that $P + \mathcal{O} = P$ for any point $P$.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;scalar-multiplication&quot;&gt;Scalar Multiplication&lt;&#x2F;h2&gt;
+&lt;p&gt;The operation central to ECC is scalar multiplication: computing $nP$ (a point $P$ added to itself $n$ times). While addition can be computed in polynomial time, there is no known efficient algorithm to compute $n$ given $P$ and $nP$ for large $n$. This is the discrete logarithm problem for elliptic curves (ECDLP), and its computational difficulty forms the basis of ECC security.&lt;&#x2F;p&gt;
+&lt;p&gt;Scalar multiplication can be efficiently computed using the double-and-add algorithm:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Express $n$ in binary: $n = \sum_{i=0}^{t} n_i 2^i$ where $n_i \in {0,1}$&lt;&#x2F;li&gt;
+&lt;li&gt;Initialize $Q = \mathcal{O}$&lt;&#x2F;li&gt;
+&lt;li&gt;For $i$ from $t$ down to 0:
+&lt;ul&gt;
+&lt;li&gt;$Q = 2Q$ (doubling)&lt;&#x2F;li&gt;
+&lt;li&gt;If $n_i = 1$, then $Q = Q + P$ (addition)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Return $Q = nP$&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;This algorithm computes $nP$ in $O(\log n)$ operations.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;finite-field-arithmetic&quot;&gt;Finite Field Arithmetic&lt;&#x2F;h2&gt;
+&lt;p&gt;In practice, all calculations are performed in finite fields, and the formulas must be adapted accordingly. For a curve over $\mathbb{F}_p$, all arithmetic operations are performed modulo $p$.&lt;&#x2F;p&gt;
+&lt;p&gt;For $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ on $E(\mathbb{F}_p)$, the addition formulas become:&lt;&#x2F;p&gt;
+&lt;p&gt;$$ \lambda = \frac{y_2 - y_1}{x_2 - x_1} \mod p $$
+$$ x_3 = (\lambda^2 - x_1 - x_2) \mod p $$
+$$ y_3 = (\lambda(x_1 - x_3) - y_1) \mod p $$&lt;&#x2F;p&gt;
+&lt;p&gt;And for doubling $P$:&lt;&#x2F;p&gt;
+&lt;p&gt;$$ \lambda = \frac{3x_1^2 + a}{2y_1} \mod p $$
+$$ x_3 = (\lambda^2 - 2x_1) \mod p $$
+$$ y_3 = (\lambda(x_1 - x_3) - y_1) \mod p $$&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ecc-key-generation-and-exchange&quot;&gt;ECC Key Generation and Exchange&lt;&#x2F;h2&gt;
+&lt;p&gt;The cryptographic power of ECC lies in its key generation and exchange protocols:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Key Generation&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose a secure elliptic curve $E$ over a finite field and a base point $G$ of large order $n$&lt;&#x2F;li&gt;
+&lt;li&gt;Select a random integer $d \in [1, n-1]$ as the private key&lt;&#x2F;li&gt;
+&lt;li&gt;Compute the public key $Q = dG$&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Diffie-Hellman Key Exchange&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alice generates key pair $(d_A, Q_A = d_A G)$&lt;&#x2F;li&gt;
+&lt;li&gt;Bob generates key pair $(d_B, Q_B = d_B G)$&lt;&#x2F;li&gt;
+&lt;li&gt;They exchange public keys $Q_A$ and $Q_B$&lt;&#x2F;li&gt;
+&lt;li&gt;Alice computes $S = d_A Q_B = d_A d_B G$&lt;&#x2F;li&gt;
+&lt;li&gt;Bob computes $S = d_B Q_A = d_B d_A G$&lt;&#x2F;li&gt;
+&lt;li&gt;Both arrive at the same shared secret $S$&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;An eavesdropper would need to solve the ECDLP to derive the private keys.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;elliptic-curve-digital-signature-algorithm-ecdsa&quot;&gt;Elliptic Curve Digital Signature Algorithm (ECDSA)&lt;&#x2F;h2&gt;
+&lt;p&gt;ECDSA is a variant of the Digital Signature Algorithm (DSA) that uses elliptic curve cryptography:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Signature Generation&lt;&#x2F;strong&gt; (by Alice):&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose a random $k \in [1, n-1]$&lt;&#x2F;li&gt;
+&lt;li&gt;Compute $R = kG$ and extract the x-coordinate $r = x_R \mod n$&lt;&#x2F;li&gt;
+&lt;li&gt;Compute $s = k^{-1}(H(m) + d_A \cdot r) \mod n$, where $H(m)$ is the hash of message $m$&lt;&#x2F;li&gt;
+&lt;li&gt;The signature is the pair $(r, s)$&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Signature Verification&lt;&#x2F;strong&gt; (by Bob):&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Compute $u_1 = s^{-1} \cdot H(m) \mod n$ and $u_2 = s^{-1} \cdot r \mod n$&lt;&#x2F;li&gt;
+&lt;li&gt;Compute $R&#x27; = u_1 G + u_2 Q_A$&lt;&#x2F;li&gt;
+&lt;li&gt;The signature is valid if $r \equiv x_{R&#x27;} \pmod{n}$&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;standard-curves-and-security-considerations&quot;&gt;Standard Curves and Security Considerations&lt;&#x2F;h2&gt;
+&lt;p&gt;Commonly used standardized elliptic curves include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NIST curves&lt;&#x2F;strong&gt;: P-256, P-384, P-521&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Curve25519&#x2F;Ed25519&lt;&#x2F;strong&gt;: Designed for efficiency and security by Daniel J. Bernstein&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;secp256k1&lt;&#x2F;strong&gt;: Used in Bitcoin and other cryptocurrencies&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The security of an elliptic curve system depends on:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Curve selection&lt;&#x2F;strong&gt;: Avoid curves with known vulnerabilities&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Field size&lt;&#x2F;strong&gt;: For general security, the prime $p$ should be at least 256 bits&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Implementation&lt;&#x2F;strong&gt;: Must be resistant to side-channel attacks&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Random number generation&lt;&#x2F;strong&gt;: Critical for key generation and signing&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;The discrete logarithm problem on a well-chosen elliptic curve with a 256-bit field size is believed to provide security equivalent to RSA with a 3072-bit modulus.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;advantages-of-ecc-over-rsa&quot;&gt;Advantages of ECC over RSA&lt;&#x2F;h2&gt;
+&lt;p&gt;ECC offers several advantages over traditional RSA cryptography:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Smaller key sizes&lt;&#x2F;strong&gt;: A 256-bit ECC key provides comparable security to a 3072-bit RSA key&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Greater efficiency&lt;&#x2F;strong&gt;: Faster computations, especially for signature generation&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Lower bandwidth and storage requirements&lt;&#x2F;strong&gt;: Smaller keys and signatures&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Lower power consumption&lt;&#x2F;strong&gt;: Important for resource-constrained devices&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;These advantages make ECC particularly suitable for:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mobile and IoT devices&lt;&#x2F;li&gt;
+&lt;li&gt;Smart cards&lt;&#x2F;li&gt;
+&lt;li&gt;TLS&#x2F;SSL connections&lt;&#x2F;li&gt;
+&lt;li&gt;Cryptocurrency systems&lt;&#x2F;li&gt;
+&lt;li&gt;VPN protocols&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;Elliptic curve cryptography represents one of the most elegant applications of advanced mathematics to practical security problems. Its efficiency and strong security properties have made it the cryptographic method of choice for many modern applications, from securing web traffic to enabling digital currencies.&lt;&#x2F;p&gt;
+&lt;p&gt;The mathematical beauty of elliptic curves combined with their cryptographic utility demonstrates how pure mathematics can lead to powerful real-world applications that shape our digital infrastructure.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

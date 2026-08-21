@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elliptic Curve Cryptography: An Introduction | Raúl de la Fuente</title>
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#282828" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#fbf1c7" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="https://rdelaf.nand.cl/favicon.png">
+    <link rel="stylesheet" href="https://rdelaf.nand.cl/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://rdelaf.nand.cl/js/theme.js"></script>
+    <script src="https://rdelaf.nand.cl/js/main.js"></script>
+    
+<!-- Add MathJax for LaTeX rendering -->
+<script>
+    MathJax = {
+      svg: {
+        fontCache: 'global'
+      },
+      tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            packages: ['base', 'ams', 'noerrors', 'noundefined', 'autoload']
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        startup: {
+            ready: function() {
+                MathJax.startup.defaultReady();
+            }
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body class="blog-page">
+    <div class="container">
+        <nav class="navbar rough-edge">
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="navbar-left">
+                
+    <a href="https:&#x2F;&#x2F;rdelaf.nand.cl" class="nav-link ">Home</a>
+    <a href="https://rdelaf.nand.cl/publications" class="nav-link ">Publications</a>
+    <a href="https://rdelaf.nand.cl/blog/" class="nav-link active ">Blog</a>
+    <a href="https://rdelaf.nand.cl/documents/resume.pdf" class="nav-link">CV</a>
+
+            </div>
+            <div class="navbar-right">
+                <button id="theme-toggle" class="theme-toggle">☀️</button>
+            </div>
+        </nav>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="sidebar-content">
+                
+    <a href="https:&#x2F;&#x2F;rdelaf.nand.cl" class="nav-link ">Home</a>
+    <a href="https://rdelaf.nand.cl/publications" class="nav-link ">Publications</a>
+    <a href="https://rdelaf.nand.cl/blog/" class="nav-link active ">Blog</a>
+    <a href="https://rdelaf.nand.cl/documents/resume.pdf" class="nav-link">CV</a>
+
+            </div>
+        </div>
+
+        <main>
+            
+<div class="terminal-section rough-edge">
+    <div class="terminal-header">
+        <span class="terminal-title">~/blog</span>
+    </div>
+    <div class="terminal-body">
+        <p class="terminal-line">
+            <span class="terminal-prompt">$</span> 
+            <span class="terminal-command">cat ecc.md</span>
+        </p>
+        
+        <div class="terminal-output">
+            <div class="post-content markdown-content">
+                <h1 id="elliptic-curve-cryptography-an-introduction">Elliptic Curve Cryptography: An Introduction</h1>
+<p>Elliptic Curve Cryptography (ECC) is a powerful approach to public-key cryptography based on the algebraic structure of elliptic curves over finite fields. This post explains the mathematical foundations of ECC and its practical applications in modern cryptography.</p>
+<h2 id="elliptic-curves-the-basics">Elliptic Curves: The Basics</h2>
+<p>An elliptic curve over a field $K$ is defined by the Weierstrass equation:</p>
+<p>$$ E: y^2 = x^3 + ax + b $$</p>
+<p>where $a, b \in K$ and the discriminant $\Delta = -16(4a^3 + 27b^2) \neq 0$ (ensuring the curve is non-singular).</p>
+<p>In cryptography, we typically work with elliptic curves over finite fields $\mathbb{F}_p$ (where $p$ is a prime) or $\mathbb{F}_{2^m}$ (binary fields). For simplicity, we'll focus on curves over $\mathbb{F}_p$, which gives us:</p>
+<p>$$ E(\mathbb{F}_p): y^2 \equiv x^3 + ax + b \pmod{p} $$</p>
+<p>The set of points on the curve, along with a special point at infinity $\mathcal{O}$, forms an abelian group.</p>
+<h2 id="group-law-point-addition">Group Law: Point Addition</h2>
+<p>The fundamental operation in ECC is point addition. Given two points $P$ and $Q$ on an elliptic curve, their sum $P + Q$ is defined geometrically:</p>
+<ol>
+<li>Draw a line through $P$ and $Q$</li>
+<li>Find the third intersection point of this line with the curve</li>
+<li>Reflect this point across the x-axis to get $P + Q$</li>
+</ol>
+<p>Algebraically, if $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ with $P \neq Q$, then $P + Q = (x_3, y_3)$ where:</p>
+<p>$$ \lambda = \frac{y_2 - y_1}{x_2 - x_1} $$
+$$ x_3 = \lambda^2 - x_1 - x_2 $$
+$$ y_3 = \lambda(x_1 - x_3) - y_1 $$</p>
+<p>If $P = Q$, we use the tangent line (point doubling):</p>
+<p>$$ \lambda = \frac{3x_1^2 + a}{2y_1} $$
+$$ x_3 = \lambda^2 - 2x_1 $$
+$$ y_3 = \lambda(x_1 - x_3) - y_1 $$</p>
+<p>The point at infinity $\mathcal{O}$ serves as the identity element such that $P + \mathcal{O} = P$ for any point $P$.</p>
+<h2 id="scalar-multiplication">Scalar Multiplication</h2>
+<p>The operation central to ECC is scalar multiplication: computing $nP$ (a point $P$ added to itself $n$ times). While addition can be computed in polynomial time, there is no known efficient algorithm to compute $n$ given $P$ and $nP$ for large $n$. This is the discrete logarithm problem for elliptic curves (ECDLP), and its computational difficulty forms the basis of ECC security.</p>
+<p>Scalar multiplication can be efficiently computed using the double-and-add algorithm:</p>
+<ol>
+<li>Express $n$ in binary: $n = \sum_{i=0}^{t} n_i 2^i$ where $n_i \in {0,1}$</li>
+<li>Initialize $Q = \mathcal{O}$</li>
+<li>For $i$ from $t$ down to 0:
+<ul>
+<li>$Q = 2Q$ (doubling)</li>
+<li>If $n_i = 1$, then $Q = Q + P$ (addition)</li>
+</ul>
+</li>
+<li>Return $Q = nP$</li>
+</ol>
+<p>This algorithm computes $nP$ in $O(\log n)$ operations.</p>
+<h2 id="finite-field-arithmetic">Finite Field Arithmetic</h2>
+<p>In practice, all calculations are performed in finite fields, and the formulas must be adapted accordingly. For a curve over $\mathbb{F}_p$, all arithmetic operations are performed modulo $p$.</p>
+<p>For $P = (x_1, y_1)$ and $Q = (x_2, y_2)$ on $E(\mathbb{F}_p)$, the addition formulas become:</p>
+<p>$$ \lambda = \frac{y_2 - y_1}{x_2 - x_1} \mod p $$
+$$ x_3 = (\lambda^2 - x_1 - x_2) \mod p $$
+$$ y_3 = (\lambda(x_1 - x_3) - y_1) \mod p $$</p>
+<p>And for doubling $P$:</p>
+<p>$$ \lambda = \frac{3x_1^2 + a}{2y_1} \mod p $$
+$$ x_3 = (\lambda^2 - 2x_1) \mod p $$
+$$ y_3 = (\lambda(x_1 - x_3) - y_1) \mod p $$</p>
+<h2 id="ecc-key-generation-and-exchange">ECC Key Generation and Exchange</h2>
+<p>The cryptographic power of ECC lies in its key generation and exchange protocols:</p>
+<ol>
+<li>
+<p><strong>Key Generation</strong>:</p>
+<ul>
+<li>Choose a secure elliptic curve $E$ over a finite field and a base point $G$ of large order $n$</li>
+<li>Select a random integer $d \in [1, n-1]$ as the private key</li>
+<li>Compute the public key $Q = dG$</li>
+</ul>
+</li>
+<li>
+<p><strong>Diffie-Hellman Key Exchange</strong>:</p>
+<ul>
+<li>Alice generates key pair $(d_A, Q_A = d_A G)$</li>
+<li>Bob generates key pair $(d_B, Q_B = d_B G)$</li>
+<li>They exchange public keys $Q_A$ and $Q_B$</li>
+<li>Alice computes $S = d_A Q_B = d_A d_B G$</li>
+<li>Bob computes $S = d_B Q_A = d_B d_A G$</li>
+<li>Both arrive at the same shared secret $S$</li>
+</ul>
+</li>
+</ol>
+<p>An eavesdropper would need to solve the ECDLP to derive the private keys.</p>
+<h2 id="elliptic-curve-digital-signature-algorithm-ecdsa">Elliptic Curve Digital Signature Algorithm (ECDSA)</h2>
+<p>ECDSA is a variant of the Digital Signature Algorithm (DSA) that uses elliptic curve cryptography:</p>
+<ol>
+<li>
+<p><strong>Signature Generation</strong> (by Alice):</p>
+<ul>
+<li>Choose a random $k \in [1, n-1]$</li>
+<li>Compute $R = kG$ and extract the x-coordinate $r = x_R \mod n$</li>
+<li>Compute $s = k^{-1}(H(m) + d_A \cdot r) \mod n$, where $H(m)$ is the hash of message $m$</li>
+<li>The signature is the pair $(r, s)$</li>
+</ul>
+</li>
+<li>
+<p><strong>Signature Verification</strong> (by Bob):</p>
+<ul>
+<li>Compute $u_1 = s^{-1} \cdot H(m) \mod n$ and $u_2 = s^{-1} \cdot r \mod n$</li>
+<li>Compute $R' = u_1 G + u_2 Q_A$</li>
+<li>The signature is valid if $r \equiv x_{R'} \pmod{n}$</li>
+</ul>
+</li>
+</ol>
+<h2 id="standard-curves-and-security-considerations">Standard Curves and Security Considerations</h2>
+<p>Commonly used standardized elliptic curves include:</p>
+<ul>
+<li><strong>NIST curves</strong>: P-256, P-384, P-521</li>
+<li><strong>Curve25519/Ed25519</strong>: Designed for efficiency and security by Daniel J. Bernstein</li>
+<li><strong>secp256k1</strong>: Used in Bitcoin and other cryptocurrencies</li>
+</ul>
+<p>The security of an elliptic curve system depends on:</p>
+<ol>
+<li><strong>Curve selection</strong>: Avoid curves with known vulnerabilities</li>
+<li><strong>Field size</strong>: For general security, the prime $p$ should be at least 256 bits</li>
+<li><strong>Implementation</strong>: Must be resistant to side-channel attacks</li>
+<li><strong>Random number generation</strong>: Critical for key generation and signing</li>
+</ol>
+<p>The discrete logarithm problem on a well-chosen elliptic curve with a 256-bit field size is believed to provide security equivalent to RSA with a 3072-bit modulus.</p>
+<h2 id="advantages-of-ecc-over-rsa">Advantages of ECC over RSA</h2>
+<p>ECC offers several advantages over traditional RSA cryptography:</p>
+<ol>
+<li><strong>Smaller key sizes</strong>: A 256-bit ECC key provides comparable security to a 3072-bit RSA key</li>
+<li><strong>Greater efficiency</strong>: Faster computations, especially for signature generation</li>
+<li><strong>Lower bandwidth and storage requirements</strong>: Smaller keys and signatures</li>
+<li><strong>Lower power consumption</strong>: Important for resource-constrained devices</li>
+</ol>
+<p>These advantages make ECC particularly suitable for:</p>
+<ul>
+<li>Mobile and IoT devices</li>
+<li>Smart cards</li>
+<li>TLS/SSL connections</li>
+<li>Cryptocurrency systems</li>
+<li>VPN protocols</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Elliptic curve cryptography represents one of the most elegant applications of advanced mathematics to practical security problems. Its efficiency and strong security properties have made it the cryptographic method of choice for many modern applications, from securing web traffic to enabling digital currencies.</p>
+<p>The mathematical beauty of elliptic curves combined with their cryptographic utility demonstrates how pure mathematics can lead to powerful real-world applications that shape our digital infrastructure.</p>
+
+            </div>
+            
+            <footer class="post-footer">
+                <a href="https://rdelaf.nand.cl/blog/" class="back-to-blog">← Back to Blog</a>
+            </footer>
+        </div>
+    </div>
+</div>
+
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2026 Raúl de la Fuente. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html> 
