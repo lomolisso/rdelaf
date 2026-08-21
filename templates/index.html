@@ -15,17 +15,24 @@
         <div class="terminal-output combined-section">
             <div class="profile-sidebar">
                 <div class="sidebar-row image-row">
-                    <div class="whoami-image">
-                        <img src="/me.jpg" alt="{{ config.title }}" />
+                    <div class="whoami-image flip-container" id="profile-flip">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <img src="/me.jpg" alt="{{ config.title }}" />
+                            </div>
+                            <div class="flip-back">
+                                <img id="cat-image" src="/lucy.png" alt="Lucy" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="sidebar-row name-row">
-                    <p class="profile-name">{{ config.title }}</p>
+                    <p class="profile-name" id="profile-name">{{ config.title }}</p>
                 </div>
                 <div class="sidebar-row location-row" style="margin-top: -5px; margin-bottom: -5px;">
                     <p class="profile-location" style="font-size: 0.9em;"><i class="fas fa-map-marker-alt"></i> Urbana, IL</p>
                 </div>
-                <div class="sidebar-row contact-row">
+                <div class="sidebar-row contact-row" id="profile-contact">
                     <div class="contact-column">
                         <div class="contact-item"><a href="mailto:{{ section.extra.contact.email }}"><i class="fas fa-envelope"></i> Email</a></div>
                         <div class="contact-item"><a href="{{ section.extra.contact.github }}"><i class="fab fa-github"></i> GitHub</a></div>
@@ -36,6 +43,9 @@
                         <div class="contact-item"><a href="{{ section.extra.contact.scholar }}"><i class="fas fa-graduation-cap"></i> Scholar</a></div>
                         <div class="contact-item"><a href="{{ section.extra.contact.orcid }}"><i class="fab fa-orcid"></i> ORCID</a></div>
                     </div>
+                </div>
+                <div class="sidebar-row cat-story" id="cat-story" hidden>
+                    <p></p>
                 </div>
             </div>
             <div class="about-content">
