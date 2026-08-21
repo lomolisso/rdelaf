@@ -69,9 +69,10 @@ function setupCatProfile() {
     const catImage = document.getElementById('cat-image');
     const name = document.getElementById('profile-name');
     const contact = document.getElementById('profile-contact');
+    const locationRow = document.getElementById('profile-location');
     const story = document.getElementById('cat-story');
     const catLinks = document.querySelectorAll('.cat-link');
-    if (!flip || !catImage || !name || !contact || !story || catLinks.length === 0) return;
+    if (!flip || !catImage || !name || !contact || !locationRow || !story || catLinks.length === 0) return;
 
     const cats = {
         lucy: {
@@ -82,44 +83,76 @@ function setupCatProfile() {
         nina: {
             name: 'Nina',
             image: '/nina.png',
-            story: "Nina and her two sisters were abandoned as kittens by a heartless man in March 2024. When they were about 6 months old I caught all three, found the sisters a forever home together, while Nina stayed with me."
+            story: "Nina and her two sisters were abandoned as kittens in March 2024. At about 6 months old I caught all three, found her sisters a home together, and Nina stayed with me."
         }
     };
     const ownerName = name.textContent;
     const halfFlip = 300; // half of the 0.6s CSS flip transition
+    const fullFlip = 600;
     let currentCat = null;
+    let transitioning = false;
+
+    // Set the story text and restart its fade-in animation
+    function setStory(text) {
+        const p = story.querySelector('p');
+        p.textContent = text;
+        p.style.animation = 'none';
+        void p.offsetWidth; // force reflow so the animation restarts
+        p.style.animation = '';
+    }
 
     function showCat(key) {
         const cat = cats[key];
-        catImage.src = cat.image;
-        catImage.alt = cat.name;
-        story.querySelector('p').textContent = cat.story;
+        transitioning = true;
         if (currentCat === null) {
+            catImage.src = cat.image;
+            catImage.alt = cat.name;
             flip.classList.add('flipped');
+            currentCat = key;
             setTimeout(function() {
                 name.textContent = cat.name;
                 contact.hidden = true;
+                locationRow.hidden = true;
                 story.hidden = false;
+                setStory(cat.story);
+                transitioning = false;
             }, halfFlip);
         } else {
-            name.textContent = cat.name;
+            // Flip away from the current cat, then flip back in with the new one
+            currentCat = key;
+            story.hidden = true;
+            flip.classList.remove('flipped');
+            setTimeout(function() {
+                catImage.src = cat.image;
+                catImage.alt = cat.name;
+                name.textContent = cat.name;
+                flip.classList.add('flipped');
+                setTimeout(function() {
+                    story.hidden = false;
+                    setStory(cat.story);
+                    transitioning = false;
+                }, halfFlip);
+            }, fullFlip);
         }
-        currentCat = key;
     }
 
     function showOwner() {
-        flip.classList.remove('flipped');
+        transitioning = true;
         currentCat = null;
+        flip.classList.remove('flipped');
         setTimeout(function() {
             name.textContent = ownerName;
             contact.hidden = false;
+            locationRow.hidden = false;
             story.hidden = true;
+            transitioning = false;
         }, halfFlip);
     }
 
     catLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
+            if (transitioning) return;
             const key = link.dataset.cat;
             if (currentCat === key) {
                 showOwner();
@@ -131,7 +164,7 @@ function setupCatProfile() {
 
     // Clicking the cat picture flips back to the profile
     flip.addEventListener('click', function() {
-        if (currentCat !== null) showOwner();
+        if (currentCat !== null && !transitioning) showOwner();
     });
 }
 
