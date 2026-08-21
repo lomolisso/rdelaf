@@ -27,4 +27,4 @@ I earned my M.Sc. in Computer Science at the University of Chile, where I was ad
 
 Beyond research, I enjoy hands-on projects, particularly tinkering with electronics, as well as hobbyist game development. I also like to cook, lift weights, read manga, and spoil my two cats, <a href="#" class="cat-link" data-cat="lucy">Lucy</a> and <a href="#" class="cat-link" data-cat="nina">Nina</a>.
 
-Feel free to contact me through any of the provided links or check out my [blog](#) to see what I'm currently working on!
+Feel free to contact me through any of the provided links or check out my [blog](@/blog/_index.md) to see what I'm currently working on!
